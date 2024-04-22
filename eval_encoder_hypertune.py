@@ -11,7 +11,7 @@ from configs import generate_config_poseformer, generate_config_motionbert, gene
 from data.dataloaders import *
 from const import path
 from utility.utils import set_random_seed
-from test_hypertune import *
+from test import *
 
 this_path = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, this_path + "/../")
@@ -52,7 +52,6 @@ if __name__ == '__main__':
     parser.add_argument('--data_path', type=str,default=path.PD_PATH_POSES)
     parser.add_argument('--seed', default=0, type=int, help='random seed')
     parser.add_argument('--tune_fresh', default=1, type=int, help='start a new tuning process or cont. on a previous study')
-    parser.add_argument('--ntrials', default=30, type=int, help='number of hyper-param tuning trials')
     parser.add_argument('--last_run_foldnum', default='7', type=str)
     parser.add_argument('--readstudyfrom', default=1, type=int)
     
@@ -107,5 +106,5 @@ if __name__ == '__main__':
         all_folds = range(1, num_folds + 1)
         set_random_seed(param['seed'])
 
-        test__hypertune(params, new_params, all_folds, backbone_name, _DEVICE)
+        test_and_report(params, new_params, all_folds, backbone_name, _DEVICE)
             
