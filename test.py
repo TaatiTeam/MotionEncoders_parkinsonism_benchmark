@@ -12,7 +12,7 @@ from sklearn.metrics import classification_report, confusion_matrix
 from data.dataloaders import dataset_factory
 from model.motion_encoder import MotionEncoder
 from model.backbone_loader import load_pretrained_backbone, count_parameters, load_pretrained_weights
-from training_hypertune import train_model, final_test
+from train import train_model, final_test
 from utility import utils
 from const import path
 from eval_encoder_hypertune import log_results
