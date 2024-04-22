@@ -1,0 +1,5 @@
+{
+	"augmentation": ["random_rotation"],
+	"rotation_range": [-20, 20]
+}
+

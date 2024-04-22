@@ -1,0 +1,18 @@
+{
+    "merge_joints": true,
+    "classifier_hidden_dims": [
+        1024
+    ],
+    "classifier_dropout": 0.0,
+    "weight_decay": 0.0,
+    "lambda_l1": 0.0001,
+    "select_middle": false,
+    "mirror_prob": 0.5,
+    "rotation_prob": 0.5,
+    "noise_prob": 0.5,
+    "data_type": "Kinect",
+    "source_seq_len": 27,
+    "dim_feat": 64,
+    "n_layers": 12,
+    "model_checkpoint_path": "/cluster/projects/taati/vida/motion_evaluator_data/Pretrained_checkpoints/motionagformer/motionagformer-xs-h36m.pth.tr"
+}

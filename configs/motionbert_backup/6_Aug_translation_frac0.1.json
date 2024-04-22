@@ -1,0 +1,5 @@
+{
+	"augmentation": ["random_translation"],
+	"translation_frac": 0.1
+}
+
