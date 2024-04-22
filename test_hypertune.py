@@ -67,11 +67,9 @@ def test__hypertune(params, new_params, all_folds, backbone_name, device):
                 "num_epochs": 20,
                 "num_hidden_layers": 2,
                 "layer_sizes":[256, 50, 16, 3],
-                # "architecture_type": architecture_type,
                 "optimizer": 'RMSprop',
                 "use_weighted_loss": True,
                 "batch_size": 128,
-                # "use_batch_norm": False,
                 "dropout_rate": 0.1,
                 'weight_decay': 0.00057,
                 'momentum': 0.66
@@ -91,8 +89,6 @@ def test__hypertune(params, new_params, all_folds, backbone_name, device):
     params['classifier_hidden_dims'] = map_to_classifier_dim(backbone_name, best_params['classifier_hidden_dims'])
     params['optimizer'] = best_params['optimizer']
     params['lr_head'] = best_params['lr']
-    # params['lr_decay'] = best_params['lr_decay']
-    # params['lr_step_size'] = best_params['lr_step_size']
     params['lambda_l1'] = best_params['lambda_l1']
     params['epochs'] = best_params['num_epochs']
     if best_params['use_weighted_loss']:
