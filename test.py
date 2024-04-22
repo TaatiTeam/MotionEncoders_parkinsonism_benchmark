@@ -15,7 +15,7 @@ from model.backbone_loader import load_pretrained_backbone, count_parameters, lo
 from train import train_model, final_test
 from utility import utils
 from const import path
-from eval_encoder_hypertune import log_results
+from eval_encoder import log_results
 from stat_analysis.get_stats import get_stats
 
 
