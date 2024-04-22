@@ -173,70 +173,54 @@ def process_fold(fold, params, backbone_name, train_dataset_fn, val_dataset_fn, 
     print(f"Fold {fold} run time:", duration)
 
 
-def get_results(params, total_outs_best, total_gts, total_states, total_video_names, total_outs_last, rep_out):
-    #================================BEST REPORTS=============================
-    rep_best_final = classification_report(total_gts, total_outs_best)  
-    confusion_best_final = confusion_matrix(total_gts, total_outs_best)
-    log_results(rep_best_final, confusion_best_final, 'best_report_allfolds.txt', 'best_confusion_matrix_allfolds.png', rep_out)
-    
-    #==============ON - OFF REPORTS===================
-    # Splitting the data into 'ON' and 'OFF' groups
-    total_gts_on = [gt for gt, state in zip(total_gts, total_states) if state == 'ON']
-    total_outs_best_on = [out for out, state in zip(total_outs_best, total_states) if state == 'ON']
+def calculate_metrics(outputs, targets, states, phase, report_prefix, output_dir):
+    # Filter outputs and targets based on the phase ('ON' or 'OFF')
+    filtered_gts = [gt for gt, state in zip(targets, states) if state == phase]
+    filtered_outs = [out for out, state in zip(outputs, states) if state == phase]
 
-    total_gts_off = [gt for gt, state in zip(total_gts, total_states) if state == 'OFF']
-    total_outs_best_off = [out for out, state in zip(total_outs_best, total_states) if state == 'OFF']
+    report = classification_report(filtered_gts, filtered_outs)
+    confusion = confusion_matrix(filtered_gts, filtered_outs)
 
-    # Calculating metrics for the 'ON' group
-    print("============ON==================")
-    rep_best_final_on = classification_report(total_gts_on, total_outs_best_on)
-    confusion_best_final_on = confusion_matrix(total_gts_on, total_outs_best_on)
-    log_results(rep_best_final_on, confusion_best_final_on, 'best_report_allfolds_ON.txt', 'best_confusion_matrix_allfolds_ON.png', rep_out)
+    log_results(
+        report, confusion, 
+        f'{report_prefix}_allfolds_{phase}.txt', 
+        f'{report_prefix}_confusion_matrix_allfolds_{phase}.png', 
+        output_dir
+    )
 
-    print("============OFF==================")
-    # Calculating metrics for the 'OFF' group
-    rep_best_final_off = classification_report(total_gts_off, total_outs_best_off)
-    confusion_best_final_off = confusion_matrix(total_gts_off, total_outs_best_off)
-    log_results(rep_best_final_off, confusion_best_final_off, 'best_report_allfolds_OFF.txt', 'best_confusion_matrix_allfolds_OFF.png', rep_out)
-    
-    
-    #================================LAST REPORTS=============================
-    rep_last_final = classification_report(total_gts, total_outs_last)  
-    confusion_last_final = confusion_matrix(total_gts, total_outs_last)
-    log_results(rep_last_final, confusion_last_final, 'last_report_allfolds.txt', 'last_confusion_matrix_allfolds.png', rep_out)
-    
-    #==============ON - OFF REPORTS===================
-    # Splitting the data into 'ON' and 'OFF' groups
-    total_gts_on = [gt for gt, state in zip(total_gts, total_states) if state == 'ON']
-    total_outs_last_on = [out for out, state in zip(total_outs_last, total_states) if state == 'ON']
+def process_reports(outputs_best, outputs_last, targets, states, output_dir):
+    # Process reports for 'best' and 'last' data
+    for prefix, outputs in [('best', outputs_best), ('last', outputs_last)]:
+        print(f"=========={prefix.upper()} REPORTS============")
+        # Full dataset metrics
+        report_final = classification_report(targets, outputs)
+        confusion_final = confusion_matrix(targets, outputs)
+        log_results(report_final, confusion_final, f'{prefix}_report_allfolds.txt', f'{prefix}_confusion_matrix_allfolds.png', output_dir)
 
-    total_gts_off = [gt for gt, state in zip(total_gts, total_states) if state == 'OFF']
-    total_outs_last_off = [out for out, state in zip(total_outs_last, total_states) if state == 'OFF']
+        # 'ON' and 'OFF' group metrics
+        for phase in ['ON', 'OFF']:
+            calculate_metrics(outputs, targets, states, phase, prefix, output_dir)
 
-    # Calculating metrics for the 'ON' group
-    print("============ON==================")
-    rep_last_final_on = classification_report(total_gts_on, total_outs_last_on)
-    confusion_last_final_on = confusion_matrix(total_gts_on, total_outs_last_on)
-    log_results(rep_last_final_on, confusion_last_final_on, 'last_report_allfolds_ON.txt', 'last_confusion_matrix_allfolds_ON.png', rep_out)
+def save_and_load_results(video_names, outputs_best, outputs_last, targets, output_dir):
+    results = pd.DataFrame({
+        'total_video_names': video_names,
+        'total_outs_best': outputs_best,
+        'total_outs_last': outputs_last,
+        'total_gts': targets
+    })
+    results_path = os.path.join(output_dir, 'final_results.pkl')
+    with open(results_path, 'wb') as file:
+        pickle.dump(results, file)
 
-    print("============OFF==================")
-    # Calculating metrics for the 'OFF' group
-    rep_last_final_off = classification_report(total_gts_off, total_outs_last_off)
-    confusion_last_final_off = confusion_matrix(total_gts_off, total_outs_last_off)
-    log_results(rep_last_final_off, confusion_last_final_off, 'last_report_allfolds_OFF.txt', 'last_confusion_matrix_allfolds_OFF.png', rep_out)
+    with open(results_path, 'rb') as file:
+        loaded_results = pickle.load(file)
     
-    res = pd.DataFrame({'total_video_names': total_video_names, 'total_outs_best': total_outs_best, 'total_outs_last': total_outs_last, 'total_gts':total_gts})
-    with open(os.path.join(rep_out, 'final_results.pkl'), 'wb') as file:
-        pickle.dump(res, file)
-        
-    with open(path.OUT_PATH + os.path.join(params['model_prefix'], 'final_results.pkl'), 'rb') as file:
-        final_results = pickle.load(file)
-    total_video_names = final_results['total_video_names']
-    total_outs_best = final_results['total_outs_best']
-    total_outs_last = final_results['total_outs_last']
+    total_video_names = loaded_results['total_video_names']
+    total_outs_best = loaded_results['total_outs_best']
+    total_outs_last = loaded_results['total_outs_last']
     
-    get_stats(total_video_names, total_outs_best, rep_out, 'best')
-    get_stats(total_video_names, total_outs_last, rep_out, 'last')
+    get_stats(total_video_names, total_outs_best, output_dir, 'best')
+    get_stats(total_video_names, total_outs_last, output_dir, 'last')
 
 
 def test_and_report(params, new_params, all_folds, backbone_name, device):
@@ -244,5 +228,6 @@ def test_and_report(params, new_params, all_folds, backbone_name, device):
     params = configure_params_for_best_model(params, backbone_name)
     initialize_wandb(params)
     total_outs_best, total_gts, total_states, total_video_names, total_outs_last = run_fold_tests(params, all_folds, backbone_name, device, rep_out)
-    get_results(params, total_outs_best, total_gts, total_states, total_video_names, total_outs_last, rep_out)
+    process_reports(total_outs_best, total_outs_last, total_gts, total_states, rep_out)
+    save_and_load_results(total_video_names, total_outs_best, total_outs_last, total_gts, rep_out)
     wandb.finish()
