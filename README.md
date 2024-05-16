@@ -13,6 +13,13 @@ git clone https://github.com/TaatiTeam/MotionEncoders_parkinsonism_benchmark.git
 cd yourprojectname
 pip install -r requirements.txt
 ```
+
+## Data
+Dataloaders will be added soon.
+
+## Demo
+Demo will be added soon.
+
 ## Leaderboard
 
 | Model          | F1 Score | Paper/Source |
