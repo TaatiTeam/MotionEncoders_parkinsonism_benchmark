@@ -10,7 +10,7 @@ This project is created as part of the research for the paper titled "Benchmarki
 ## Installation
 ```bash
 git clone https://github.com/TaatiTeam/MotionEncoders_parkinsonism_benchmark.git
-cd yourprojectname
+cd MotionEncoders_parkinsonism_benchmark
 pip install -r requirements.txt
 ```
 
