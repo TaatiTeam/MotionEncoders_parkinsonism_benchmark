@@ -56,7 +56,7 @@ Our code also refers to the following repositories. We thank the authors for rel
 ## Citation
 Please cite our paper if this library helps your research:
 ```
-@inproceedings{motionagformer2024,
+@inproceedings{PDmotionBenchmark2024,
   title     =   {Benchmarking Skeleton-based Motion Encoder Models for Clinical Applications: Estimating Parkinson’s Disease Severity in Walking Sequences}, 
   author    =   {Vida Adeli, Soroush Mehraban, Yasamin Zarghami, Irene Ballester, Andrea Sabo, Andrea Iaboni, Babak Taati},
   booktitle =   {2024 18th IEEE international conference on automatic face & gesture recognition (FG 2024)},
