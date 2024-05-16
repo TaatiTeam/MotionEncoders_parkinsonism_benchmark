@@ -38,7 +38,7 @@ For detailed rankings, visit the [Paperswithcode Leaderboard](https://paperswith
 
 
 ## Acknowledgement
-Special thanks to the dataset creators for releasing their clinical dataset: 
+Special thanks to the creators of the dataset for making their clinical data publicly available:
 - [A public data set of walking full-body](https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2023.992585/full)
 
 Our code also refers to the following repositories. We thank the authors for releasing their codes.
