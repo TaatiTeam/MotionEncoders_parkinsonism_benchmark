@@ -5,7 +5,7 @@
 
 
 ## Introduction
-This project is created as part of the research for the paper titled "Benchmarking Skeleton-based Motion Encoder Models for Clinical Applications: Estimating Parkinson’s Disease Severity in Walking Sequences" accepted at IEEE  international conference on automatic face \& gesture recognition (FG 2024). 
+This project is created as part of the research for the paper titled "[Benchmarking Skeleton-based Motion Encoder Models for Clinical Applications: Estimating Parkinson’s Disease Severity in Walking Sequences](https://arxiv.org/abs/2405.17817)" accepted at IEEE  international conference on automatic face \& gesture recognition (FG 2024). 
 
 ## Installation
 ```bash
