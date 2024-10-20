@@ -24,10 +24,10 @@ Demo will be added soon.
 
 | Model          | F1 Score | Paper/Source |
 | ---------------|----------|--------------|
-| MixSTE   | 0.41    | [Link](https://paperswithcode.com/paper/xyz) |
-| MotionAGFormer  | 0.42    | [Link](https://paperswithcode.com/paper/abc) |
-| MotionBERT-LITE    | 0.43    | [Link](https://paperswithcode.com/paper/xyz) |
-| POTR   | 0.46    | [Link](https://paperswithcode.com/paper/abc) |
+| MixSTE   | 0.41    | [Link](https://paperswithcode.com/paper/mixste-seq2seq-mixed-spatio-temporal-encoder) |
+| MotionAGFormer  | 0.42    | [Link](https://paperswithcode.com/paper/motionagformer-enhancing-3d-human-pose) |
+| MotionBERT-LITE    | 0.43    | [Link](https://paperswithcode.com/paper/motionbert-unified-pretraining-for-human) |
+| POTR   | 0.46    | [Link](https://paperswithcode.com/paper/pose-transformers-potr-human-motion) |
 | MotionBERT    | 0.47    | [Link](https://paperswithcode.com/paper/motionbert-unified-pretraining-for-human) |
 | PD STGCN  | 0.48    | [Link](https://paperswithcode.com/paper/abc) |
 | PoseFormerV2    | 0.59    | [Link](https://paperswithcode.com/paper/poseformerv2-exploring-frequency-domain-for) |
