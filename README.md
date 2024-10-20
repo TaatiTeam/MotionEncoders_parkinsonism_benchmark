@@ -28,9 +28,9 @@ Demo will be added soon.
 | MotionAGFormer  | 0.42    | [Link](https://paperswithcode.com/paper/abc) |
 | MotionBERT-LITE    | 0.43    | [Link](https://paperswithcode.com/paper/xyz) |
 | POTR   | 0.46    | [Link](https://paperswithcode.com/paper/abc) |
-| MotionBERT    | 0.47    | [Link](https://paperswithcode.com/paper/xyz) |
+| MotionBERT    | 0.47    | [Link]([https://paperswithcode.com/paper/xyz](https://paperswithcode.com/paper/motionbert-unified-pretraining-for-human)) |
 | PD STGCN  | 0.48    | [Link](https://paperswithcode.com/paper/abc) |
-| PoseFormerV2    | 0.59    | [Link](https://paperswithcode.com/paper/xyz) |
+| PoseFormerV2    | 0.59    | [Link]([https://paperswithcode.com/paper/xyz](https://paperswithcode.com/paper/poseformerv2-exploring-frequency-domain-for)) |
 | PoseFormerV2-Finetuned  | 0.62    | [Link](https://paperswithcode.com/paper/abc) |
 
 
